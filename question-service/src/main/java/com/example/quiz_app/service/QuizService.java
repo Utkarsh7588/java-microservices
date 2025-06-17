@@ -5,6 +5,7 @@ import com.example.quiz_app.dao.QuizDao;
 import com.example.quiz_app.model.Question;
 import com.example.quiz_app.model.QuestionWrapper;
 import com.example.quiz_app.model.Quiz;
+import com.example.quiz_app.model.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,18 @@ public class QuizService {
         questionsForUser.add(qw);
         }
         return new ResponseEntity<>(questionsForUser,HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> calculateScore(Integer id, List<Response> responses) {
+        Quiz quiz=quizDao.findById(id).get();
+        List<Question> questions=quiz.getQuestions();
+        int i=0, right=0;
+        for(Response response:responses){
+            if(response.getResponse().equals(questions.get(i).getRightAnswer())){
+                right++;
+            }
+            i++;
+        }
+        return new ResponseEntity<>(right,HttpStatus.OK);
     }
 }
