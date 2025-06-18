@@ -1,11 +1,10 @@
-package com.example.quiz_app.service;
+package com.example.quiz_service.service;
 
-import com.example.quiz_app.dao.QuestionDao;
-import com.example.quiz_app.dao.QuizDao;
-import com.example.quiz_app.model.Question;
-import com.example.quiz_app.model.QuestionWrapper;
-import com.example.quiz_app.model.Quiz;
-import com.example.quiz_app.model.Response;
+import com.example.quiz_service.dao.QuizDao;
+import com.example.quiz_service.model.Question;
+import com.example.quiz_service.model.QuestionWrapper;
+import com.example.quiz_service.model.Quiz;
+import com.example.quiz_service.model.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,19 +15,19 @@ import java.util.Optional;
 
 @Service
 public class QuizService {
-    QuestionDao questionDao;
+
     QuizDao quizDao;
 
-    public QuizService(QuestionDao questionDao, QuizDao quizDao) {
-        this.questionDao = questionDao;
+    public QuizService( QuizDao quizDao) {
         this.quizDao = quizDao;
     }
 
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
+
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
-        List<Question> list= questionDao.findRandomQuestionsByCategory(category, numQ);
-        quiz.setQuestions(list);
+//        List<Question> list= questionDao.findRandomQuestionsByCategory(category, numQ);
+//        quiz.setQuestions(list);
         quizDao.save(quiz);
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
 

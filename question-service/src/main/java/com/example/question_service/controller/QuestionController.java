@@ -1,7 +1,9 @@
-package com.example.quiz_app.controller;
+package com.example.question_service.controller;
 
-import com.example.quiz_app.model.Question;
-import com.example.quiz_app.service.QuestionService;
+import com.example.question_service.model.Question;
+import com.example.question_service.model.QuestionWrapper;
+import com.example.question_service.model.Response;
+import com.example.question_service.service.QuestionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +33,18 @@ public class QuestionController {
     }
 
     @GetMapping("generate")
-    public ResponseEntity<List<Question>> getQuestionsForQuiz
+    public ResponseEntity<List<Integer>> getQuestionsForQuiz
             (@RequestParam String categoryName, @RequestParam Integer numQuestions ){
         return questionService.getQuestionsForQuiz(categoryName, numQuestions);
+    }
+
+    @PostMapping("getQuestions")
+    public ResponseEntity<List<QuestionWrapper>> getQuestionsFromId(@RequestParam List<Integer> questionIds){
+    return questionService.getQuestionsFromId(questionIds);
+    }
+
+    @PostMapping("getScore")
+    public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+        return  questionService.getScore(responses);
     }
 }

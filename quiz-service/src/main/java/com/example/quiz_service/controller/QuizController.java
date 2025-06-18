@@ -1,9 +1,10 @@
-package com.example.quiz_app.controller;
+package com.example.quiz_service.controller;
 
-import com.example.quiz_app.model.Question;
-import com.example.quiz_app.model.QuestionWrapper;
-import com.example.quiz_app.model.Response;
-import com.example.quiz_app.service.QuizService;
+
+import com.example.quiz_service.model.QuestionWrapper;
+import com.example.quiz_service.model.QuizDto;
+import com.example.quiz_service.model.Response;
+import com.example.quiz_service.service.QuizService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,8 @@ public class QuizController {
     }
 
     @GetMapping("create")
-    public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam  int num, @RequestParam String title){
-        return quizService.createQuiz(category,num, title);
+    public ResponseEntity<String> createQuiz(@RequestBody QuizDto quizDto){
+        return quizService.createQuiz(quizDto.getCategoryName(),quizDto.getNumQuestions(), quizDto.getTitle());
     }
 
     @GetMapping("get/{id}")
