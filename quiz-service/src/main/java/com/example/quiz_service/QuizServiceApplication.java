@@ -1,13 +1,13 @@
-package com.example.quiz_app;
+package com.example.quiz_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class QuestionServiceApplication {
+public class QuizServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuestionServiceApplication.class, args);
+		SpringApplication.run(QuizServiceApplication.class, args);
 	}
 
 }
